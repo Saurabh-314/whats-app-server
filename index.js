@@ -34,7 +34,8 @@ mongoose.connect(MONGO_URL, {
 
 const io = new Server(server, {
     cors: {
-        origin: "http://localhost:3000",
+        origin: "https://whats-app-314.netlify.app/",
+        // origin: "http://localhost:3000",
         methods: ['GET', 'POST']
     }
 })
