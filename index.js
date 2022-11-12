@@ -5,6 +5,8 @@ const http = require('http');
 const cors = require('cors');
 const { Server } = require('socket.io');
 const userRoutes = require("./routes/userRoutes");
+const homeRoutes = require("./routes/homeRoutes");
+
 require("dotenv").config();
 app.use(cors());
 
@@ -16,6 +18,7 @@ const MONGO_URL = process.env.MONGO_URL;
 app.use(express.json());
 // require("dotenv").config();
 
+app.use("/", homeRoutes)
 app.use("/auth", userRoutes);
 
 const server = http.createServer(app);
