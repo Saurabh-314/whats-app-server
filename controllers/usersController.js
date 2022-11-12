@@ -2,10 +2,6 @@ const User = require("../models/userModel");
 const Messages = require("../models/messageModel");
 const bcrypt = require("bcrypt");
 
-module.exports.home = (req, res) => {
-    res.send("working...");
-}
-
 module.exports.register = async (req, res, next) => {
     try {
         const { username, email, password } = req.body;
