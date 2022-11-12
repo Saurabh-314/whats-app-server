@@ -5,12 +5,13 @@ const http = require('http');
 const cors = require('cors');
 const { Server } = require('socket.io');
 const userRoutes = require("./routes/userRoutes");
+require("dotenv").config();
 app.use(cors());
 
-// const PORT = process.env.PORT // production 
-const PORT = 5000 || process.env.PORT // development 
+const PORT = process.env.PORT // production 
+// const PORT = 5000 || process.env.PORT // development 
 
-const MONGO_URL = "mongodb+srv://saurabh-314:9%40XmgUD2BnKk%217B@cluster0.jfrinjg.mongodb.net/whats-app?retryWrites=true&w=majority";
+const MONGO_URL = process.env.MONGO_URL;
 
 app.use(express.json());
 // require("dotenv").config();
@@ -18,7 +19,6 @@ app.use(express.json());
 app.use("/auth", userRoutes);
 
 const server = http.createServer(app);
-require("dotenv").config();
 
 mongoose.connect(MONGO_URL, {
     useNewUrlParser: true,
