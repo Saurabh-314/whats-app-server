@@ -3,7 +3,8 @@ const mongoose = require("mongoose");
 const app = express();
 const http = require('http');
 const cors = require('cors');
-const { Server } = require('socket.io');
+// const { Server } = require('socket.io');
+const socketIo = require("socket.io");
 const userRoutes = require("./routes/userRoutes");
 const homeRoutes = require("./routes/homeRoutes");
 
@@ -29,17 +30,18 @@ mongoose.connect(MONGO_URL, {
 }).then(() => {
     console.log("db connection successfully");
 }).catch((err) => {
-    console.log(err.message);
+    console.log("error",err.message);
 })
 
-const io = new Server(server, {
-    cors: {
-        origin: "https://whats-app-314.netlify.app/",
-        // origin: "http://localhost:3000",
-        methods: ['GET', 'POST']
-    }
-})
+// const io = new Server(server, {
+//     cors: {
+//         origin: "https://whats-app-314.netlify.app/",
+//         // origin: "http://localhost:3000",
+//         methods: ['GET', 'POST']
+//     }
+// })
 
+const io = socketIo(server); // for connection
 io.on("connection", (socket) => {
     console.log('User Connected', socket.id)
 
